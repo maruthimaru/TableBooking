@@ -87,8 +87,12 @@ public class Theatre extends AppCompatActivity {
         a1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent intent = new Intent(Theatre.this, SeatSelection.class);
+                Intent intent;
+                if (movie==01){
+                    intent = new Intent(Theatre.this, SeatSelectionRound.class);
+                }else {
+                    intent = new Intent(Theatre.this, SeatSelection.class);
+                }
                 intent.putExtra("movie_id", movie);
                 intent.putExtra("date", date);
                 intent.putExtra("theatre", "Barbeque Nation");
@@ -101,8 +105,12 @@ public class Theatre extends AppCompatActivity {
         AMC2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent intent = new Intent(Theatre.this, SeatSelection.class);
+                Intent intent;
+                if (movie==01){
+                    intent = new Intent(Theatre.this, SeatSelectionRound.class);
+                }else {
+                    intent = new Intent(Theatre.this, SeatSelection.class);
+                }
                 intent.putExtra("movie_id", movie);
                 intent.putExtra("date", date);
                 intent.putExtra("theatre", "Barbeque Nation");
@@ -115,8 +123,13 @@ public class Theatre extends AppCompatActivity {
         AMC3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent;
+                if (movie==01){
+                    intent = new Intent(Theatre.this, SeatSelectionRound.class);
+                }else {
 
-                Intent intent = new Intent(Theatre.this, SeatSelection.class);
+                     intent = new Intent(Theatre.this, SeatSelection.class);
+                }
                 intent.putExtra("movie_id", movie);
                 intent.putExtra("date", date);
                 intent.putExtra("theatre", "Barbeque Nation");
@@ -129,8 +142,12 @@ public class Theatre extends AppCompatActivity {
         AMC4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent intent = new Intent(Theatre.this, SeatSelection.class);
+                Intent intent;
+                if (movie==01){
+                    intent = new Intent(Theatre.this, SeatSelectionRound.class);
+                }else {
+                    intent = new Intent(Theatre.this, SeatSelection.class);
+                }
                 intent.putExtra("movie_id", movie);
                 intent.putExtra("date", date);
                 intent.putExtra("theatre", "Barbeque Nation");
@@ -143,8 +160,12 @@ public class Theatre extends AppCompatActivity {
         AMC5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent intent = new Intent(Theatre.this, SeatSelection.class);
+                Intent intent;
+                if (movie==01){
+                    intent = new Intent(Theatre.this, SeatSelectionRound.class);
+                }else {
+                    intent = new Intent(Theatre.this, SeatSelection.class);
+                }
                 intent.putExtra("movie_id", movie);
                 intent.putExtra("date", date);
                 intent.putExtra("theatre", "Barbeque Nation");
@@ -157,8 +178,12 @@ public class Theatre extends AppCompatActivity {
         RC1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent intent = new Intent(Theatre.this, SeatSelection.class);
+                Intent intent;
+                if (movie==01){
+                    intent = new Intent(Theatre.this, SeatSelectionRound.class);
+                }else {
+                    intent = new Intent(Theatre.this, SeatSelection.class);
+                }
                 intent.putExtra("movie_id", movie);
                 intent.putExtra("date", date);
                 intent.putExtra("theatre", "Bird on Tree");
@@ -171,8 +196,12 @@ public class Theatre extends AppCompatActivity {
         RC2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent intent = new Intent(Theatre.this, SeatSelection.class);
+                Intent intent;
+                if (movie==01){
+                    intent = new Intent(Theatre.this, SeatSelectionRound.class);
+                }else {
+                    intent = new Intent(Theatre.this, SeatSelection.class);
+                }
                 intent.putExtra("movie_id", movie);
                 intent.putExtra("date", date);
                 intent.putExtra("theatre", "Bird on Tree");
@@ -185,8 +214,12 @@ public class Theatre extends AppCompatActivity {
         RC3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent intent = new Intent(Theatre.this, SeatSelection.class);
+                Intent intent;
+                if (movie==01){
+                    intent = new Intent(Theatre.this, SeatSelectionRound.class);
+                }else {
+                    intent = new Intent(Theatre.this, SeatSelection.class);
+                }
                 intent.putExtra("movie_id", movie);
                 intent.putExtra("date", date);
                 intent.putExtra("theatre", "Bird on Tree");
@@ -199,8 +232,12 @@ public class Theatre extends AppCompatActivity {
         RC4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent intent = new Intent(Theatre.this, SeatSelection.class);
+                Intent intent;
+                if (movie==01){
+                    intent = new Intent(Theatre.this, SeatSelectionRound.class);
+                }else {
+                    intent = new Intent(Theatre.this, SeatSelection.class);
+                }
                 intent.putExtra("movie_id", movie);
                 intent.putExtra("date", date);
                 intent.putExtra("theatre", "Bird on Tree");
@@ -213,8 +250,12 @@ public class Theatre extends AppCompatActivity {
         LMC1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent intent = new Intent(Theatre.this, SeatSelection.class);
+                Intent intent;
+                if (movie==01){
+                    intent = new Intent(Theatre.this, SeatSelectionRound.class);
+                }else {
+                    intent = new Intent(Theatre.this, SeatSelection.class);
+                }
                 intent.putExtra("movie_id", movie);
                 intent.putExtra("date", date);
                 intent.putExtra("theatre", "The Royal Hindu Restaurant");
@@ -227,8 +268,12 @@ public class Theatre extends AppCompatActivity {
         LMC2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent intent = new Intent(Theatre.this, SeatSelection.class);
+                Intent intent;
+                if (movie==01){
+                    intent = new Intent(Theatre.this, SeatSelectionRound.class);
+                }else {
+                    intent = new Intent(Theatre.this, SeatSelection.class);
+                }
                 intent.putExtra("movie_id", movie);
                 intent.putExtra("date", date);
                 intent.putExtra("theatre", "The Royal Hindu Restaurant");
@@ -241,8 +286,12 @@ public class Theatre extends AppCompatActivity {
         LMC3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent intent = new Intent(Theatre.this, SeatSelection.class);
+                Intent intent;
+                if (movie==01){
+                    intent = new Intent(Theatre.this, SeatSelectionRound.class);
+                }else {
+                    intent = new Intent(Theatre.this, SeatSelection.class);
+                }
                 intent.putExtra("movie_id", movie);
                 intent.putExtra("date", date);
                 intent.putExtra("theatre", "The Royal Hindu Restaurant");
@@ -255,8 +304,12 @@ public class Theatre extends AppCompatActivity {
         LMC4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent intent = new Intent(Theatre.this, SeatSelection.class);
+                Intent intent;
+                if (movie==01){
+                    intent = new Intent(Theatre.this, SeatSelectionRound.class);
+                }else {
+                    intent = new Intent(Theatre.this, SeatSelection.class);
+                }
                 intent.putExtra("movie_id", movie);
                 intent.putExtra("date", date);
                 intent.putExtra("theatre", "The Royal Hindu Restaurant");
@@ -269,8 +322,12 @@ public class Theatre extends AppCompatActivity {
         LMC5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent intent = new Intent(Theatre.this, SeatSelection.class);
+                Intent intent;
+                if (movie==01){
+                    intent = new Intent(Theatre.this, SeatSelectionRound.class);
+                }else {
+                    intent = new Intent(Theatre.this, SeatSelection.class);
+                }
                 intent.putExtra("movie_id", movie);
                 intent.putExtra("date", date);
                 intent.putExtra("theatre", "The Royal Hindu Restaurant");

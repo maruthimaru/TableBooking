@@ -52,14 +52,14 @@ public class Detail2 extends Activity {
         final int movie = b.getInt("booktype");
 
         if(movie == 01){
-            tv.setText("FLY PAPER");
+            tv.setText("Round table");
 
             Drawable myDrawable = getResources().getDrawable(R.drawable.image1);
             img.setImageDrawable(myDrawable);
 
         }else if (movie == 02){
 
-            tv.setText("Mission Impossible");
+            tv.setText("Meeting Table");
 
             Drawable myDrawable = getResources().getDrawable(R.drawable.front);
             img.setImageDrawable(myDrawable);
@@ -68,14 +68,14 @@ public class Detail2 extends Activity {
 
         }else if (movie == 03){
 
-            tv.setText("Avengers");
+            tv.setText("Premium Table");
 
             Drawable myDrawable = getResources().getDrawable(R.drawable.premium);
             img.setImageDrawable(myDrawable);
 
         }else if (movie == 04){
 
-            tv.setText("Spiderman-2");
+            tv.setText("Celebrity Table");
 
             Drawable myDrawable = getResources().getDrawable(R.drawable.spiderman);
             img.setImageDrawable(myDrawable);
