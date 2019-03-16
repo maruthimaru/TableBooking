@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -37,6 +38,7 @@ public class SeatSelection extends AppCompatActivity {
     String theatre;
     String time;
     String seats;
+    private String TAG=SeatSelection.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,10 +101,9 @@ public class SeatSelection extends AppCompatActivity {
                 }
                     j++;
                 }
-
+            Log.e(TAG, "onCreate: "+seating );
             System.out.print("fassdfsdsdfssdfssdf " + seating);
           List<String> seats_booked = Arrays.asList(seating.split(","));
-
 
         for (int i = 0; i < seats_booked.size(); i++) {
             System.out.println("Split String: " + seats_booked.get(i));
