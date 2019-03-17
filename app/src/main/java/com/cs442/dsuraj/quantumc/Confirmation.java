@@ -59,7 +59,7 @@ public class Confirmation extends Activity {
 
         total_price = Integer.parseInt(seat_number) * 10;
 
-        final String price_final = "$" + Integer.toString(total_price);
+        final String price_final = "$" + Integer.toString(total_price)+" + $"+seat_number;
         Cursor movie = db.getMoviename(sql, movie_id);
 
         while (movie.moveToNext()) {

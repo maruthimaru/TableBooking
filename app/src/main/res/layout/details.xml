@@ -87,7 +87,7 @@
 
     <TextView
         android:layout_height="wrap_content"
-        android:text="Price:"
+        android:text="Price + GST:"
         android:id="@+id/textView21"
         android:textColor="@color/colorPrimary"
         android:layout_marginTop="20dp"

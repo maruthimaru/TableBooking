@@ -100,7 +100,7 @@
         android:layout_width="45dp"
         android:layout_height="25dp"
         android:layout_alignTop="@+id/A3"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="-21dp"
         android:layout_toEndOf="@+id/A3"
         android:background="#E6C200"

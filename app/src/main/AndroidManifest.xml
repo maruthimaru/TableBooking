@@ -54,6 +54,8 @@
         <activity android:name=".UserReview"
             android:screenOrientation="portrait">
         </activity>
+        <activity android:name=".SeatSelectionRound"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
