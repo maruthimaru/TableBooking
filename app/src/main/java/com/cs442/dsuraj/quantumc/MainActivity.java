@@ -1,8 +1,10 @@
 package com.cs442.dsuraj.quantumc;
 
 
+import android.app.ActionBar;
 import android.content.ClipData;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
@@ -12,8 +14,16 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import java.util.Objects;
 
 import layout.GPlusFragment;
 
@@ -29,8 +39,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+/*
+        ActionBar actionbar = getActionBar();
+
+        TextView textview = new TextView(MainActivity.this);
+
+        RelativeLayout.LayoutParams layoutparams = new RelativeLayout.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
+
+        textview.setLayoutParams(layoutparams);
+
+        textview.setText("Action Bar Title Text");
+
+        textview.setGravity(Gravity.CENTER);
+
+        textview.setTextColor(Color.parseColor("#FFFFFF"));
+
+        textview.setTextSize(25);
 
 
+        if (actionbar != null) {
+            actionbar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        actionbar.setCustomView(textview);
+        }*/
         viewPager = (ViewPager)findViewById(R.id.view_pager);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawerLayout);

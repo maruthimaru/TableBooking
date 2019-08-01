@@ -3,7 +3,6 @@ package com.cs442.dsuraj.quantumc;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -11,18 +10,15 @@ import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Movie;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
@@ -31,15 +27,11 @@ import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 import java.util.TimeZone;
 
 import javax.mail.AuthenticationFailedException;
@@ -49,7 +41,7 @@ import javax.mail.MessagingException;
  * Created by sushma on 10/23/2016.
  */
 
-public class MovieConfirmation extends AppCompatActivity implements TextToSpeech.OnInitListener{
+public class TableConfirmation extends AppCompatActivity implements TextToSpeech.OnInitListener{
     private final int CHECK_CODE = 0x1;
     private final int LONG_DURATION = 5000;
     private final int SHORT_DURATION = 1200;
@@ -67,7 +59,7 @@ public class MovieConfirmation extends AppCompatActivity implements TextToSpeech
         super.onCreate(savedInstanceState);
         setContentView(R.layout.movieconfirmation);
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        Builder = new NotificationCompat.Builder(MovieConfirmation.this);
+        Builder = new NotificationCompat.Builder(TableConfirmation.this);
         Intent checkTTSIntent = new Intent();
         checkTTSIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
         startActivityForResult(checkTTSIntent, MY_DATA_CHECK_CODE);
@@ -86,7 +78,7 @@ public class MovieConfirmation extends AppCompatActivity implements TextToSpeech
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent home = new Intent(MovieConfirmation.this, MainActivity.class);
+                Intent home = new Intent(TableConfirmation.this, MainActivity.class);
                 startActivity(home);
             }
         });
@@ -346,7 +338,7 @@ public class MovieConfirmation extends AppCompatActivity implements TextToSpeech
             if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
                 //the user has the necessary data - create the TTS
 
-//                myTTS = new TextToSpeech(MovieConfirmation.this, this);
+//                myTTS = new TextToSpeech(TableConfirmation.this, this);
                 Log.d("Initialised TTS", " ");
 
             }
@@ -367,7 +359,7 @@ public class MovieConfirmation extends AppCompatActivity implements TextToSpeech
             notification(speech);
         }
         else if (initStatus == TextToSpeech.ERROR) {
-            Toast.makeText(MovieConfirmation.this, "Sorry! Text To Speech failed...", Toast.LENGTH_LONG).show();
+            Toast.makeText(TableConfirmation.this, "Sorry! Text To Speech failed...", Toast.LENGTH_LONG).show();
             Log.d("Failed" , " ");
         }
     }

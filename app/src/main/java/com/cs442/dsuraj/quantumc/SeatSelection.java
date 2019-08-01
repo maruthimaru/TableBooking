@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +24,7 @@ public class SeatSelection extends AppCompatActivity {
     ArrayList<String> arrayList1= new ArrayList<String>();
     SQLiteDatabase sql;
     DatabaseHelper db;
+    RecyclerView recyclerView;
     ArrayList<ArrayList<String>> outer = new ArrayList<ArrayList<String>>();
     int seats_counter =0 ;
     Button A1,A2,A3,A4,A5,A6,A7,A8,A9,A10;
@@ -38,6 +41,8 @@ public class SeatSelection extends AppCompatActivity {
     String theatre;
     String time;
     String seats;
+    ArrayList<MenuItemModel> menuItemModelArrayList=new ArrayList<>();
+
     private String TAG=SeatSelection.class.getSimpleName();
 
     @Override
@@ -46,6 +51,7 @@ public class SeatSelection extends AppCompatActivity {
         setContentView(R.layout.activity_seat_selection);
         db = new DatabaseHelper(getApplicationContext());
         sql = db.getReadableDatabase();
+        recyclerView=findViewById(R.id.recyclerView);
         A1 = (Button) findViewById(R.id.A1);
         A2 = (Button) findViewById(R.id.A2);
         A3 = (Button) findViewById(R.id.A3);
@@ -71,6 +77,9 @@ public class SeatSelection extends AppCompatActivity {
         D3 = (Button) findViewById(R.id.D3);
         D4 = (Button) findViewById(R.id.D4);
 
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,true));
+
 
         Bundle b = getIntent().getExtras();
         movie = b.getInt("movie_id");
@@ -81,6 +90,16 @@ public class SeatSelection extends AppCompatActivity {
         int j=0;
         String seating="";
         System.out.print(theatre);
+
+        menuItemModelArrayList=new ArrayList<>();
+        menuItemModelArrayList.add(new MenuItemModel("Chicken briyani",R.drawable.chicken_biryani_recipe));
+        menuItemModelArrayList.add(new MenuItemModel("Egg fride rice",R.drawable.egg_fried_rice));
+        menuItemModelArrayList.add(new MenuItemModel("Veg briyani",R.drawable.veg_biryani_recipe));
+        menuItemModelArrayList.add(new MenuItemModel("curd rice",R.drawable.curd_rice));
+        menuItemModelArrayList.add(new MenuItemModel("Dosa",R.drawable.dosa));
+        menuItemModelArrayList.add(new MenuItemModel("Idly",R.drawable.idly));
+        MenuItemAdapter adapter=new MenuItemAdapter(this,menuItemModelArrayList);
+        recyclerView.setAdapter(adapter);
 
         Cursor seatnos = db.getseats(sql,theatre, date, time,movie);
         System.out.print("   " + seatnos.getCount());

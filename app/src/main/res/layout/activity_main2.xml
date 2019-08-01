@@ -8,16 +8,16 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.cs442.dsuraj.quantumc.Main2Activity"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/colorPrimary">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="140dp"
-        android:src="@drawable/bslidedinner" />
+        android:visibility="gone"
+        android:background="@drawable/bslidedinner" />
 
     <TextView
         android:id="@+id/textView9"
@@ -27,6 +27,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="104dp"
         android:text="Table Booking"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="25dp" />
 </RelativeLayout>

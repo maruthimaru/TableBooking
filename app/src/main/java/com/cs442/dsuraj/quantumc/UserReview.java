@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 
 public class UserReview extends AppCompatActivity {
-    ArrayList<MovieReview> moviereview;
+    ArrayList<TableReview> moviereview;
     ListView movielist;
     CustomAdapter adapter;
     @Override
@@ -23,13 +23,13 @@ public class UserReview extends AppCompatActivity {
         //create Array list of menu items
         moviereview = new ArrayList();
 
-        moviereview.add(new MovieReview("Avenger", "@drawable/avengerreview",5,"Excellent"));
+        moviereview.add(new TableReview("Avenger", "@drawable/avengerreview",5,"Excellent"));
 
-        moviereview.add(new MovieReview("Flypaper", "@drawable/flypaperreview",3,"Good"));
+        moviereview.add(new TableReview("Flypaper", "@drawable/flypaperreview",3,"Good"));
 
-        moviereview.add(new MovieReview("Mission Impossible", "@drawable/missionimpossible",2,"Not Good"));
+        moviereview.add(new TableReview("Mission Impossible", "@drawable/missionimpossible",2,"Not Good"));
 
-        moviereview.add(new MovieReview("Spiderman", "@drawable/spidermanreview",1,"Worst Movie Ever"));
+        moviereview.add(new TableReview("Spiderman", "@drawable/spidermanreview",1,"Worst Movie Ever"));
         adapter=new CustomAdapter(this, moviereview);
 
         movielist=(ListView)findViewById(R.id.myListView);

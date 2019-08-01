@@ -1,12 +1,12 @@
 package com.cs442.dsuraj.quantumc;
 
-public  class MovieDetails {
+public  class TableDetails {
 
     private String moviename;
     private String movieimage;
     private String moviedata;
 
-    public MovieDetails(String moviename,String movieimage,String moviedata) {
+    public TableDetails(String moviename, String movieimage, String moviedata) {
         this.moviename = moviename;
         this.movieimage = movieimage;
         this.moviedata = moviedata;

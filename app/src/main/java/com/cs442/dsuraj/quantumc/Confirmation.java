@@ -16,7 +16,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -111,7 +110,7 @@ public class Confirmation extends Activity {
         time.setText(arr.get(3));
         date.setText(arr.get(2));
         price.setText(arr.get(4));
-        //Passing info to MovieConfirmation Screen
+        //Passing info to TableConfirmation Screen
         final Bundle bundle = new Bundle();
         bundle.putString("movie_id", movie_id);
         bundle.putString("date", date1);
@@ -163,7 +162,7 @@ public class Confirmation extends Activity {
                                     if (db.insertmoviebooked(Integer.parseInt(movie_id), seats.getText().toString(), theatre1, time1, date1, 10, Email, phoneno)) {
 
                                         Intent intent;
-                                        intent = new Intent(context, MovieConfirmation.class);
+                                        intent = new Intent(context, TableConfirmation.class);
                                         intent.putExtra("booking_id", (maximum + 1));
                                         intent.putExtra("amount",price_final);
                                         context.startActivity(intent);

@@ -10,9 +10,9 @@
     <!-- TODO: Update blank fragment layout -->
 
     <ImageView
-        android:layout_width="250dp"
+        android:layout_width="wrap_content"
         android:layout_height="350dp"
-        app:srcCompat="@drawable/image1"
+        android:background="@drawable/image1"
         android:id="@+id/imageView"
         android:layout_marginTop="28dp"
         android:layout_alignParentTop="true"

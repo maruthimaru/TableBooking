@@ -4,14 +4,14 @@ package com.cs442.dsuraj.quantumc;
  */
 
 
-public  class MovieReview {
+public  class TableReview {
 
     private String moviename;
     private String movieimage;
     private String user;
     private int rating;
 
-    public MovieReview(String moviename,String movieimage,int rating,String user) {
+    public TableReview(String moviename, String movieimage, int rating, String user) {
         this.moviename = moviename;
         this.movieimage = movieimage;
         this.user = user;

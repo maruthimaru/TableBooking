@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -32,7 +34,8 @@ public class SeatSelectionRound extends AppCompatActivity {
     int colorid;
     int flag=0;
     Bundle bundle;
-
+    ArrayList<MenuItemModel> menuItemModelArrayList=new ArrayList<>();
+    RecyclerView recyclerView;
     int movie;
     String date;
     String theatre;
@@ -46,6 +49,7 @@ public class SeatSelectionRound extends AppCompatActivity {
         setContentView(R.layout.activity_seat_selection_round);
         db = new DatabaseHelper(getApplicationContext());
         sql = db.getReadableDatabase();
+        recyclerView=findViewById(R.id.recyclerView);
         A1 = (Button) findViewById(R.id.A1);
         A2 = (Button) findViewById(R.id.A2);
         A3 = (Button) findViewById(R.id.A3);
@@ -71,6 +75,8 @@ public class SeatSelectionRound extends AppCompatActivity {
         D3 = (Button) findViewById(R.id.D3);
         D4 = (Button) findViewById(R.id.D4);
 
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,true));
 
         Bundle b = getIntent().getExtras();
         movie = b.getInt("movie_id");
@@ -81,6 +87,16 @@ public class SeatSelectionRound extends AppCompatActivity {
         int j=0;
         String seating="";
         System.out.print(theatre);
+
+        menuItemModelArrayList=new ArrayList<>();
+        menuItemModelArrayList.add(new MenuItemModel("Chicken briyani",R.drawable.chicken_biryani_recipe));
+        menuItemModelArrayList.add(new MenuItemModel("Egg fride rice",R.drawable.egg_fried_rice));
+        menuItemModelArrayList.add(new MenuItemModel("Veg briyani",R.drawable.veg_biryani_recipe));
+        menuItemModelArrayList.add(new MenuItemModel("curd rice",R.drawable.curd_rice));
+        menuItemModelArrayList.add(new MenuItemModel("Dosa",R.drawable.dosa));
+        menuItemModelArrayList.add(new MenuItemModel("Idly",R.drawable.idly));
+        MenuItemAdapter adapter=new MenuItemAdapter(this,menuItemModelArrayList);
+        recyclerView.setAdapter(adapter);
 
         Cursor seatnos = db.getseats(sql,theatre, date, time,movie);
         System.out.print("   " + seatnos.getCount());

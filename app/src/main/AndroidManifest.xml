@@ -41,7 +41,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".DialogBox"
             android:screenOrientation="portrait"/>
-        <activity android:name=".MovieConfirmation"
+        <activity android:name=".TableConfirmation"
             android:screenOrientation="portrait"/>
         <activity android:name=".SeatSelection"
             android:screenOrientation="portrait"/>

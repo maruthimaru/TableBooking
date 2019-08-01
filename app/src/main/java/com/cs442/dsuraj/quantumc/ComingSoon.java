@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -22,7 +21,7 @@ import java.util.TimerTask;
  */
 
 public class ComingSoon extends AppCompatActivity {
-    ArrayList<MovieDetails> moviedetails;
+    ArrayList<TableDetails> moviedetails;
     ListView movielist;
     public int currentimageindex=0;
     ImageView slidingimage;
@@ -37,13 +36,13 @@ public class ComingSoon extends AppCompatActivity {
         //create Array list of menu items
         moviedetails = new ArrayList();
 
-        moviedetails.add(new MovieDetails("Bahubaali","@drawable/bahu","https://www.youtube.com/watch?v=bICA1ZtU6ck"));
+        moviedetails.add(new TableDetails("Bahubaali","@drawable/bahu","https://www.youtube.com/watch?v=bICA1ZtU6ck"));
 
-        moviedetails.add(new MovieDetails("Dangal","@drawable/dangal","https://www.youtube.com/watch?v=x_7YlGv9u1g"));
+        moviedetails.add(new TableDetails("Dangal","@drawable/dangal","https://www.youtube.com/watch?v=x_7YlGv9u1g"));
 
-        moviedetails.add(new MovieDetails("Raees","@drawable/raees","https://www.youtube.com/watch?v=8iv3ksZs0hk"));
+        moviedetails.add(new TableDetails("Raees","@drawable/raees","https://www.youtube.com/watch?v=8iv3ksZs0hk"));
 
-        moviedetails.add(new MovieDetails("sarkar","@drawable/sarkar","https://www.youtube.com/watch?v=ea9eX2QnnV0"));
+        moviedetails.add(new TableDetails("sarkar","@drawable/sarkar","https://www.youtube.com/watch?v=ea9eX2QnnV0"));
 
 
 
