@@ -30,7 +30,7 @@ public class Confirmation extends Activity {
     DatabaseHelper db;
      int maximum=0;
     int sum=0,sum1 = 0;
-    int mul,total_price;
+    int mul,total_price,tax_price;
     EditText email;
     EditText phone;
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +56,10 @@ public class Confirmation extends Activity {
         System.out.println("The seat number value is" + seat_number);
 
 
-        total_price = Integer.parseInt(seat_number) * 10;
+        total_price = Integer.parseInt(seat_number) * 100;
+        tax_price = Integer.parseInt(seat_number) * 10;
 
-        final String price_final = "$" + Integer.toString(total_price)+" + $"+seat_number;
+        final String price_final = getResources().getString(R.string.Rs) + Integer.toString(total_price)+" + " +getResources().getString(R.string.Rs)+tax_price;
         Cursor movie = db.getMoviename(sql, movie_id);
 
         while (movie.moveToNext()) {

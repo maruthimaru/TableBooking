@@ -13,4 +13,5 @@
     <string name="id_token_fmt">ID Token: %s</string>
     <string name="signed_out">Signed out</string>
     <string name="signed_in_fmt">Signed in as: %s</string>
+    <string name="Rs">\u20B9</string>
 </resources>
