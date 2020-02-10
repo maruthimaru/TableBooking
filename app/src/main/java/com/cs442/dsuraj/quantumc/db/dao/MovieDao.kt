@@ -1,5 +1,6 @@
 package com.cs442.dsuraj.quantumc.db.dao
 
+import android.database.Cursor
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
@@ -23,8 +24,8 @@ interface MovieDao {
     @Query("Delete from Movies where MOVIE_ID=:id")
     fun deleteSingleUser(id:String)
 
-    @Query("Select * from Movies where MOVIE_ID=:mobileNo")
-    fun getAllDetails(mobileNo:String):Movies
+    @Query("select NAME FROM Movies where MOVIE_ID = :movie_id")
+    fun getAllDetails(movie_id:String): Cursor
 
     //lastDetails
     @Query("Select * from Movies where MOVIE_ID=:mobileNo ORDER BY MOVIE_ID DESC LIMIT 1")

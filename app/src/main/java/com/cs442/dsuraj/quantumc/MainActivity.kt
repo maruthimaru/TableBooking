@@ -10,6 +10,9 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.viewpager.widget.ViewPager
+import com.cs442.dsuraj.quantumc.db.AppDatabase
+import com.cs442.dsuraj.quantumc.db.dao.MovieDao
+import com.cs442.dsuraj.quantumc.db.table.Movies
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
@@ -21,6 +24,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var viewPager: ViewPager? = null
     private var drawer: DrawerLayout? = null
     private var tabLayout: TabLayout? = null
+    lateinit var appDatabase: AppDatabase
+    lateinit var movieDao: MovieDao
     private val pageTitle = arrayOf("Round Table", "Meeting Table", "Premium Table", "Celebrity")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +55,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         drawer = findViewById<View>(R.id.drawerLayout) as DrawerLayout
         setSupportActionBar(toolbar)
+        appDatabase= AppDatabase.getDatabase(this)
+        movieDao=appDatabase.movies()
+        val movieList=ArrayList<Movies>()
+        movieDao.deleteAll()
+        movieList.add(Movies(1,"Round Table","A man caught in the middle of two simultaneous robberies at the same bank desperately tries to protect the teller with whom he secretly in love.","5"))
+        movieList.add(Movies(2,"Meeting Table","Ethan and team take on their most impossible mission yet, eradicating the Syndicate - an International rogue organization as highly skilled as they are, committed to destroying the IMF.","4"))
+        movieList.add(Movies(3,"Premium Table","Earths mightiest heroes must come together and learn to fight as a team if they are to stop the mischievous Loki and his alien army from enslaving humanity.","3"))
+        movieList.add(Movies(4,"Celebrity Table","When New York is put under siege by Oscorp, it is up to Spider-Man to save the city he swore to protect as well as his loved ones.","4"))
+        movieDao.insert(movieList)
         //create default navigation drawer toggle
         val toggle = ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close)

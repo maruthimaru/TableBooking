@@ -120,18 +120,21 @@ class SeatSelection : AppCompatActivity() {
         menuItemModelArrayList.add(MenuItemModel("Idly", R.drawable.idly))
         val adapter = MenuItemAdapter(this, menuItemModelArrayList)
         recyclerView.setAdapter(adapter)
-        val seatingList =movieBookedDao.getseats(theatre!!, date!!, time!!, movie)
-        Log.e("list size : ",""+seatingList.size)
-        for (i in 0..seatingList.size) {
-            if (i == 0) {
-                seating = seatingList[i]
-            } else {
-                seating = "$seating,"
-                seating = seating + seatingList[i]
-            }
-        }
-        val seatnos = db!!.getseats(sql!!, theatre!!, date!!, time!!, movie)
-        print("   " + seatnos!!.count)
+        val seatnos =movieBookedDao.getseats(theatre!!, date!!, time!!, movie)
+        Log.e("list size : ",""+seatnos.count)
+//        for (i in 0..seatingList) {
+//            if (i == 0) {
+//                seating = seatingList[i]
+//            } else {
+//                seating = "$seating,"
+//                seating = seating + seatingList[i]
+//            }
+//        }
+
+//        Log.e("seating room : ",""+seating)
+//        val seatnos = db!!.getseats(sql!!, theatre!!, date!!, time!!, movie)
+        print("  seatnos count " + seatnos!!.count)
+        Log.e("seatnos count: ",""+seatnos!!.count)
         if (seatnos != null && seatnos.count > 0) {
             print(seating)
             while (seatnos.moveToNext()) {

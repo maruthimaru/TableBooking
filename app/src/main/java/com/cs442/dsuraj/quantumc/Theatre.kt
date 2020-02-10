@@ -71,6 +71,7 @@ class Theatre : AppCompatActivity() {
             val intent: Intent
             intent = if (movie == 1) {
                 Intent(this@Theatre, SeatSelectionRound::class.java)
+
             } else {
                 Intent(this@Theatre, SeatSelection::class.java)
             }
@@ -79,6 +80,7 @@ class Theatre : AppCompatActivity() {
             intent.putExtra("theatre", "Barbeque Nation")
             intent.putExtra("time", "11:55 AM")
             startActivity(intent)
+            finish()
         }
         AMC2.setOnClickListener {
             val intent: Intent

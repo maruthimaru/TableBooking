@@ -70,6 +70,7 @@ class Detail2 : Activity() {
                 intent.putExtra("movie_id", movie)
                 intent.putExtra("date", date)
                 startActivity(intent)
+                finish()
             } else {
                 Toast.makeText(applicationContext, "Please Select the Date", Toast.LENGTH_SHORT).show()
             }

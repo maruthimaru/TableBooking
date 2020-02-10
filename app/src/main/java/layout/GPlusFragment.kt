@@ -134,7 +134,7 @@ class GPlusFragment : Fragment(), OnConnectionFailedListener {
             val list=ArrayList<UserInfo>()
             list.add(UserInfo(acct.id, acct.displayName, acct.email))
             userInfoDao.insert(list)
-            db!!.insertuser(acct.id, acct.displayName, acct.email)
+//            db!!.insertuser(acct.id, acct.displayName, acct.email)
             println(acct.displayName + " " + acct.email)
             updateUI(true)
         } else { // Signed out, show unauthenticated UI.

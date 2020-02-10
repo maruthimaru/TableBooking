@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.cs442.dsuraj.quantumc.db.dao.MovieBookedDao
+import com.cs442.dsuraj.quantumc.db.dao.MovieDao
 import com.cs442.dsuraj.quantumc.db.dao.UserInfoDao
 import com.cs442.dsuraj.quantumc.db.table.Movies
 import com.cs442.dsuraj.quantumc.db.table.MoviesBooked
@@ -15,6 +16,7 @@ import com.cs442.dsuraj.quantumc.db.table.UserInfo
 
 abstract class AppDatabase : RoomDatabase() {
 
+    abstract fun movies():MovieDao
     abstract fun movieBooking() :MovieBookedDao
     abstract fun userInfo():UserInfoDao
             companion object {

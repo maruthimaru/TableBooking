@@ -15,4 +15,13 @@ class Movies {
     var INFORMATION: String? = null
     @SerializedName("RATINGS")
     var RATINGS: String? = null
+
+    constructor(MOVIE_ID: Int, NAME: String?, INFORMATION: String?, RATINGS: String?) {
+        this.MOVIE_ID = MOVIE_ID
+        this.NAME = NAME
+        this.INFORMATION = INFORMATION
+        this.RATINGS = RATINGS
+    }
+
+
 }

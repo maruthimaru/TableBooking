@@ -16,6 +16,7 @@ import android.widget.*
 import com.cs442.dsuraj.quantumc.TableConfirmation
 import com.cs442.dsuraj.quantumc.db.AppDatabase
 import com.cs442.dsuraj.quantumc.db.dao.MovieBookedDao
+import com.cs442.dsuraj.quantumc.db.dao.MovieDao
 import com.cs442.dsuraj.quantumc.db.table.MoviesBooked
 import java.util.*
 import java.util.regex.Pattern
@@ -36,6 +37,7 @@ class Confirmation : Activity() {
     var phone: EditText? = null
     lateinit var appDatabase:AppDatabase
     lateinit var movieBookedDao: MovieBookedDao
+    lateinit var movieDao: MovieDao
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.details)
@@ -52,6 +54,7 @@ class Confirmation : Activity() {
         val total = seat_info.getStringArrayList("total")
         appDatabase= AppDatabase.getDatabase(this)
         movieBookedDao=appDatabase.movieBooking()
+        movieDao=appDatabase.movies()
         var movie_name: String? = null
         print(movie_id)
         val seat_number = total[0]
@@ -59,7 +62,9 @@ class Confirmation : Activity() {
         total_price = seat_number.toInt() * 100
         tax_price = seat_number.toInt() * 10
         val price_final = resources.getString(R.string.Rs) + Integer.toString(total_price) + " + " + resources.getString(R.string.Rs) + tax_price
-        val movie = db!!.getMoviename(sql!!, movie_id)
+        val movie=movieDao.getAllDetails(movie_id)
+        Log.e("TAG" , "moviename $movie_id count :" + movie.count)
+//        val movie = db!!.getMoviename(sql!!, movie_id)
         while (movie.moveToNext()) {
             movie_name = movie.getString(0)
         }
@@ -148,15 +153,15 @@ class Confirmation : Activity() {
                         movieList.add(MoviesBooked(movie_id, time1,theatre1,Email,10, date1, phoneno,seats.text.toString()))
 
                         movieBookedDao.insert(movieList)
-                        if (db!!.insertmoviebooked(movie_id.toInt(), seats.text.toString(), theatre1, time1, date1, 10, Email, phoneno)) {
+//                        if (db!!.insertmoviebooked(movie_id.toInt(), seats.text.toString(), theatre1, time1, date1, 10, Email, phoneno)) {
                             val intent: Intent
                             intent = Intent(context, TableConfirmation::class.java)
                             intent.putExtra("booking_id", maximum + 1)
                             intent.putExtra("amount", price_final)
                             context.startActivity(intent)
-                        } else {
-                            Toast.makeText(applicationContext, "Error in Movie Booking. Please try again", Toast.LENGTH_LONG).show()
-                        }
+//                        } else {
+//                            Toast.makeText(applicationContext, "Error in Movie Booking. Please try again", Toast.LENGTH_LONG).show()
+//                        }
                     }
                 }
                 dialog.show()

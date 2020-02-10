@@ -25,6 +25,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import com.cs442.dsuraj.quantumc.TableConfirmation
+import com.cs442.dsuraj.quantumc.db.AppDatabase
+import com.cs442.dsuraj.quantumc.db.dao.MovieBookedDao
 import java.util.*
 import javax.mail.AuthenticationFailedException
 import javax.mail.MessagingException
@@ -44,6 +46,8 @@ class TableConfirmation : AppCompatActivity(), OnInitListener {
     var notification: Notification? = null
     private val bundle: Bundle? = null
     private val MY_DATA_CHECK_CODE = 0
+    lateinit var appDatabase: AppDatabase
+    lateinit var movieBookedDao: MovieBookedDao
     private val myTTS: TextToSpeech? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +67,8 @@ class TableConfirmation : AppCompatActivity(), OnInitListener {
         val imageview = findViewById<View>(R.id.imageView3) as ImageView
         Log.i("done select", "ok")
         val home = findViewById<View>(R.id.home) as Button
+        appDatabase= AppDatabase.getDatabase(this)
+        movieBookedDao=appDatabase.movieBooking()
         home.setOnClickListener {
             val home = Intent(this@TableConfirmation, MainActivity::class.java)
             startActivity(home)
@@ -78,8 +84,11 @@ class TableConfirmation : AppCompatActivity(), OnInitListener {
 //val=d.insertmoviebooked(1,"1","imax","10.20", 50,"cs442project@gmail.com", "2247033339");
 //System.out.print(val);
         Log.i("done inserting", "ok")
+
+        val cursor = movieBookedDao.getData(BookingId.toString())
+
         val db = d.readableDatabase
-        val cursor = d.getData(db, BookingId.toString())
+//        val cursor = d.getData(db, BookingId.toString())
         Log.i("done selecting", "ok")
         bookingid.text = BookingId.toString()
         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.SEND_SMS), 1)

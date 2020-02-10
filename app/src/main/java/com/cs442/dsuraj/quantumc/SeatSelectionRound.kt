@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cs442.dsuraj.quantumc.SeatSelectionRound
+import com.cs442.dsuraj.quantumc.db.AppDatabase
+import com.cs442.dsuraj.quantumc.db.dao.MovieBookedDao
 import java.util.*
 
 class SeatSelectionRound : AppCompatActivity() {
@@ -67,12 +69,16 @@ class SeatSelectionRound : AppCompatActivity() {
     lateinit var date: String
     lateinit var theatre: String
     lateinit var time: String
+    lateinit var appDatabase: AppDatabase
+    lateinit var movieBookedDao: MovieBookedDao
     var seats: String? = null
     private val TAG = SeatSelectionRound::class.java.simpleName
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_seat_selection_round)
         db = DatabaseHelper(applicationContext)
+        appDatabase= AppDatabase.getDatabase(this)
+        movieBookedDao=appDatabase.movieBooking()
         sql = db!!.readableDatabase
         recyclerView = findViewById(R.id.recyclerView)
         A1 = findViewById<View>(R.id.A1) as Button
@@ -113,7 +119,8 @@ class SeatSelectionRound : AppCompatActivity() {
         menuItemModelArrayList.add(MenuItemModel("Idly", R.drawable.idly))
         val adapter = MenuItemAdapter(this, menuItemModelArrayList)
         recyclerView.setAdapter(adapter)
-        val seatnos = db!!.getseats(sql, theatre, date, time, movie)
+        val seatnos =movieBookedDao.getseats(theatre!!, date!!, time!!, movie)
+//        val seatnos = db!!.getseats(sql, theatre, date, time, movie)
         print("   " + seatnos!!.count)
         if (seatnos != null && seatnos.count > 0) {
             print(seating)
@@ -560,6 +567,7 @@ class SeatSelectionRound : AppCompatActivity() {
             intent.putExtra("theatre", theatre)
             intent.putExtra("time", time)
             startActivity(intent)
+            finish()
         } else {
             val toast = Toast.makeText(applicationContext, "Please select a seat to proceed", Toast.LENGTH_LONG)
             toast.show()

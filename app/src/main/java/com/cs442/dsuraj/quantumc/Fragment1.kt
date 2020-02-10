@@ -32,5 +32,6 @@ class Fragment1 : Fragment(), View.OnClickListener {
         val intent = Intent(activity, Detail2::class.java)
         intent.putExtra("booktype", 1)
         startActivity(intent)
+        activity!!.finish()
     }
 }
