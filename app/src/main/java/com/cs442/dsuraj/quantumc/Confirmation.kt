@@ -2,6 +2,7 @@ package com.cs442.dsuraj.quantumc
 
 import android.app.Activity
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
@@ -15,14 +16,28 @@ import android.view.WindowManager
 import android.widget.*
 import com.cs442.dsuraj.quantumc.TableConfirmation
 import com.cs442.dsuraj.quantumc.db.AppDatabase
+import com.cs442.dsuraj.quantumc.db.JSONArrayCursor
 import com.cs442.dsuraj.quantumc.db.dao.MovieBookedDao
 import com.cs442.dsuraj.quantumc.db.dao.MovieDao
+import com.cs442.dsuraj.quantumc.db.table.MaxResponse
 import com.cs442.dsuraj.quantumc.db.table.MoviesBooked
+import com.cs442.dsuraj.quantumc.retrofit.CustomDialog
+import com.cs442.dsuraj.quantumc.retrofit.Utils
+import com.google.gson.Gson
+import com.scoto.visitormanagent.retrofit.ApiService
+import com.scoto.visitormanagent.retrofit.RetrofitClientInstance
+import org.json.JSONArray
+import retrofit2.Call
+import retrofit2.Callback
 import java.util.*
 import java.util.regex.Pattern
 import kotlin.collections.ArrayList
 
 class Confirmation : Activity() {
+    private lateinit var showme: ProgressDialog
+    private lateinit var price_final: String
+    private lateinit var movieList: java.util.ArrayList<MoviesBooked>
+    private val TAG: String=Confirmation::class.java.simpleName
     var arr = ArrayList<String?>()
     val context: Context = this
     var sql: SQLiteDatabase? = null
@@ -35,6 +50,7 @@ class Confirmation : Activity() {
     var tax_price = 0
     var email: EditText? = null
     var phone: EditText? = null
+    lateinit var customDialog:CustomDialog
     lateinit var appDatabase:AppDatabase
     lateinit var movieBookedDao: MovieBookedDao
     lateinit var movieDao: MovieDao
@@ -42,6 +58,7 @@ class Confirmation : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.details)
         db = DatabaseHelper(applicationContext)
+        customDialog= CustomDialog(this)
         sql = db!!.writableDatabase
         val toast = Toast.makeText(applicationContext, "Confirmation Page", Toast.LENGTH_LONG)
         val intent = intent
@@ -61,7 +78,7 @@ class Confirmation : Activity() {
         println("The seat number value is$seat_number")
         total_price = seat_number.toInt() * 100
         tax_price = seat_number.toInt() * 10
-        val price_final = resources.getString(R.string.Rs) + Integer.toString(total_price) + " + " + resources.getString(R.string.Rs) + tax_price
+        price_final = resources.getString(R.string.Rs) + Integer.toString(total_price) + " + " + resources.getString(R.string.Rs) + tax_price
         val movie=movieDao.getAllDetails(movie_id)
         Log.e("TAG" , "moviename $movie_id count :" + movie.count)
 //        val movie = db!!.getMoviename(sql!!, movie_id)
@@ -135,11 +152,16 @@ class Confirmation : Activity() {
                 order.setOnClickListener {
                     val reversedarry = ArrayList<String>()
                     if (namecard.text.toString().isEmpty() || creditcard.text.toString().isEmpty() || cvvno.text.toString().isEmpty() || valid.text.toString().isEmpty()) {
-                        Toast.makeText(applicationContext, "Please insert the data", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(applicationContext, "Please insert the maxTables", Toast.LENGTH_SHORT).show()
                     } else {
                         val booking_id = 0
                         Log.d("phone no", phoneno)
+                        movieList=ArrayList<MoviesBooked>()
+                        movieList.add(MoviesBooked(movie_id, time1,theatre1,Email,10, date1, phoneno,seats.text.toString()))
+
                         maximum=movieBookedDao.getMax()
+                        getMax()
+
                         Log.e(" maximum : " , ""+maximum)
 //                        val max = db!!.getmaxbooking(sql!!)
 //                        if (max != null && max.count > 0) {
@@ -148,25 +170,81 @@ class Confirmation : Activity() {
 //                                maximum = max.getInt(0)
 //                            }
 //                        }
-
-                        val movieList=ArrayList<MoviesBooked>()
-                        movieList.add(MoviesBooked(movie_id, time1,theatre1,Email,10, date1, phoneno,seats.text.toString()))
-
-                        movieBookedDao.insert(movieList)
-//                        if (db!!.insertmoviebooked(movie_id.toInt(), seats.text.toString(), theatre1, time1, date1, 10, Email, phoneno)) {
-                            val intent: Intent
-                            intent = Intent(context, TableConfirmation::class.java)
-                            intent.putExtra("booking_id", maximum + 1)
-                            intent.putExtra("amount", price_final)
-                            context.startActivity(intent)
-//                        } else {
-//                            Toast.makeText(applicationContext, "Error in Movie Booking. Please try again", Toast.LENGTH_LONG).show()
-//                        }
                     }
                 }
                 dialog.show()
             }
         }
+    }
+
+    private fun getMax(){
+//        alertDialog = customDialog.loading(activity!!)
+        showme=customDialog.processDialog()
+        val service = RetrofitClientInstance.createServices(ApiService::class.java, Utils.baseUrl)
+        val listCall = service.getmax()
+        Log.e(TAG, "listCall : " + listCall.request())
+        listCall.enqueue(object : Callback<MaxResponse> {
+            override fun onFailure(call: Call<MaxResponse>, t: Throwable) {
+                Log.e(TAG, "onFailure : " + t.localizedMessage)
+                getInserBookedTable(movieList)
+
+            }
+            override fun onResponse(call: Call<MaxResponse>, response: retrofit2.Response<MaxResponse>) {
+                Log.e(TAG, "onResponse : " + response)
+                if (response.body() != null) {
+                    if (response.body()!!.status!!){
+                        maximum=response.body()!!.maxTables!!.get(0).maxBOOKINGID!!.toInt()
+
+                        getInserBookedTable(movieList)
+                    }else{
+                        Toast.makeText(applicationContext,response.body()!!.message!!,Toast.LENGTH_SHORT).show()
+                    }
+
+                }else{
+                    getInserBookedTable(movieList)
+                }
+            }
+
+        })
+    }
+
+
+    private fun getInserBookedTable(movieList:ArrayList<MoviesBooked>) {
+//        alertDialog = customDialog.loading(activity!!)
+        Log.e(TAG,"json object booked : " + Gson().toJson(movieList))
+        val service = RetrofitClientInstance.createServices(ApiService::class.java, Utils.baseUrl)
+        val listCall = service.insertBookedTable(movieList)
+        Log.e(TAG, "listCall : " + listCall.request())
+        listCall.enqueue(object : Callback<ArrayList<MoviesBooked>> {
+            override fun onFailure(call: Call<ArrayList<MoviesBooked>>, t: Throwable) {
+                Log.e(TAG, "onFailure : " + t.localizedMessage)
+                intentMove()
+                showme.dismiss()
+            }
+            override fun onResponse(call: Call<ArrayList<MoviesBooked>>, response: retrofit2.Response<ArrayList<MoviesBooked>>) {
+                Log.e(TAG, "onResponse : " + response)
+                if (response.body() != null) {
+                    intentMove()
+                    showme.dismiss()
+                }else{
+                    intentMove()
+                    showme.dismiss()
+                }
+            }
+        })
+    }
+
+    fun intentMove(){
+        movieBookedDao.insert(movieList)
+//                        if (db!!.insertmoviebooked(movie_id.toInt(), seats.text.toString(), theatre1, time1, date1, 10, Email, phoneno)) {
+        val intent: Intent
+        intent = Intent(context, TableConfirmation::class.java)
+        intent.putExtra("booking_id", maximum + 1)
+        intent.putExtra("amount", price_final)
+        context.startActivity(intent)
+//                        } else {
+//                            Toast.makeText(applicationContext, "Error in Movie Booking. Please try again", Toast.LENGTH_LONG).show()
+//                        }
     }
 
     private fun isValidEmaillId(email: String): Boolean {

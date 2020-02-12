@@ -1,6 +1,7 @@
 package com.cs442.dsuraj.quantumc
 
 import android.content.Intent
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -12,13 +13,26 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.cs442.dsuraj.quantumc.SeatSelection
 import com.cs442.dsuraj.quantumc.db.AppDatabase
+import com.cs442.dsuraj.quantumc.db.JSONArrayCursor
 import com.cs442.dsuraj.quantumc.db.dao.MovieBookedDao
+import com.cs442.dsuraj.quantumc.db.table.DataResponse
+import com.cs442.dsuraj.quantumc.db.table.SeatDetailResponse
+import com.cs442.dsuraj.quantumc.db.table.SeatRequest
+import com.cs442.dsuraj.quantumc.retrofit.CustomDialog
+import com.cs442.dsuraj.quantumc.retrofit.Utils
+import com.scoto.visitormanagent.retrofit.ApiService
+import com.scoto.visitormanagent.retrofit.RetrofitClientInstance
+import org.json.JSONArray
+import retrofit2.Call
+import retrofit2.Callback
 import java.util.*
-import kotlin.math.log
 
 class SeatSelection : AppCompatActivity() {
+    private lateinit var seating: String
+    var j = 0
+    private lateinit var jSONArrayCursor: Cursor
+    lateinit var customDialog: CustomDialog
     var arrayList = ArrayList<String?>()
     var arrayList1 = ArrayList<String?>()
     var sql: SQLiteDatabase? = null
@@ -78,6 +92,7 @@ class SeatSelection : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_seat_selection)
         db = DatabaseHelper(applicationContext)
+        customDialog= CustomDialog(this)
         appDatabase= AppDatabase.getDatabase(this)
         movieBookedDao=appDatabase.movieBooking()
         sql = db!!.readableDatabase
@@ -108,8 +123,7 @@ class SeatSelection : AppCompatActivity() {
         theatre = b.getString("theatre")
         time = b.getString("time")
         // while should encompass the below code and forloop
-        var j = 0
-        var seating = ""
+        seating = ""
         print(theatre)
         menuItemModelArrayList = ArrayList()
         menuItemModelArrayList.add(MenuItemModel("Chicken briyani", R.drawable.chicken_biryani_recipe))
@@ -121,6 +135,9 @@ class SeatSelection : AppCompatActivity() {
         val adapter = MenuItemAdapter(this, menuItemModelArrayList)
         recyclerView.setAdapter(adapter)
         val seatnos =movieBookedDao.getseats(theatre!!, date!!, time!!, movie)
+        cursorProcess(seatnos)
+        val seatObj=SeatRequest(movie.toString(),theatre!!,time!!,date!!)
+        getseats(seatObj)
         Log.e("list size : ",""+seatnos.count)
 //        for (i in 0..seatingList) {
 //            if (i == 0) {
@@ -133,70 +150,7 @@ class SeatSelection : AppCompatActivity() {
 
 //        Log.e("seating room : ",""+seating)
 //        val seatnos = db!!.getseats(sql!!, theatre!!, date!!, time!!, movie)
-        print("  seatnos count " + seatnos!!.count)
-        Log.e("seatnos count: ",""+seatnos!!.count)
-        if (seatnos != null && seatnos.count > 0) {
-            print(seating)
-            while (seatnos.moveToNext()) {
-                if (j == 0) {
-                    seating = seatnos.getString(0)
-                } else if (seatnos.count > 1) {
-                    seating = "$seating,"
-                    seating = if (!seatnos.isLast) {
-                        seating + seatnos.getString(0)
-                    } else {
-                        seating + seatnos.getString(0)
-                    }
-                }
-                j++
-            }
-            Log.e(TAG, "onCreate: $seating")
-            print("fassdfsdsdfssdfssdf $seating")
-            val seats_booked = Arrays.asList(*seating.split(",").toTypedArray())
-            for (i in seats_booked.indices) {
-                println("Split String: " + seats_booked[i])
-                if ("A1" == seats_booked[i]) {
-                    A1!!.setBackgroundColor(Color.parseColor("#A45B5B"))
-                } else if ("A2" == seats_booked[i]) {
-                    A2!!.setBackgroundColor(Color.parseColor("#A45B5B"))
-                } else if ("A3" == seats_booked[i]) {
-                    A3!!.setBackgroundColor(Color.parseColor("#A45B5B"))
-                } else if ("A4" == seats_booked[i]) {
-                    A4!!.setBackgroundColor(Color.parseColor("#A45B5B"))
-                } else if ("A5" == seats_booked[i]) {
-                    A5!!.setBackgroundColor(Color.parseColor("#A45B5B"))
-                } else if ("A6" == seats_booked[i]) {
-                    A6!!.setBackgroundColor(Color.parseColor("#A45B5B"))
-                } else if ("B1" == seats_booked[i]) {
-                    B1!!.setBackgroundColor(Color.parseColor("#A45B5B"))
-                } else if ("B2" == seats_booked[i]) {
-                    B2!!.setBackgroundColor(Color.parseColor("#A45B5B"))
-                } else if ("B3" == seats_booked[i]) {
-                    B3!!.setBackgroundColor(Color.parseColor("#A45B5B"))
-                } else if ("B4" == seats_booked[i]) {
-                    B4!!.setBackgroundColor(Color.parseColor("#A45B5B"))
-                } else if ("C1" == seats_booked[i]) {
-                    C1!!.setBackgroundColor(Color.parseColor("#A45B5B"))
-                } else if ("C2" == seats_booked[i]) {
-                    C2!!.setBackgroundColor(Color.parseColor("#A45B5B"))
-                } else if ("C3" == seats_booked[i]) {
-                    C3!!.setBackgroundColor(Color.parseColor("#A45B5B"))
-                } else if ("C4" == seats_booked[i]) {
-                    C4!!.setBackgroundColor(Color.parseColor("#A45B5B"))
-                } else if ("D1" == seats_booked[i]) {
-                    D1!!.setBackgroundColor(Color.parseColor("#A45B5B"))
-                } else if ("D2" == seats_booked[i]) {
-                    D2!!.setBackgroundColor(Color.parseColor("#A45B5B"))
-                } else if ("D3" == seats_booked[i]) {
-                    D3!!.setBackgroundColor(Color.parseColor("#A45B5B"))
-                } else if ("D4" == seats_booked[i]) {
-                    D4!!.setBackgroundColor(Color.parseColor("#A45B5B"))
-                }
-            }
-            // }
-        } else {
-            print("no print")
-        }
+
         A1!!.setOnClickListener {
             val buttonColor = A1!!.background as ColorDrawable
             colorid = buttonColor.color
@@ -541,6 +495,104 @@ class SeatSelection : AppCompatActivity() {
         }
         //  temp=Integer.toString(seats_counter);
 // arrayList.add(temp);
+    }
+
+
+    private fun getseats(seatRequest: SeatRequest){
+//        alertDialog = customDialog.loading(activity!!)
+        val showme=customDialog.processDialog()
+        val service = RetrofitClientInstance.createServices(ApiService::class.java, Utils.baseUrl)
+        val listCall = service.getSeat(seatRequest)
+        Log.e(TAG, "listCall : " + listCall.request())
+        listCall.enqueue(object : Callback<SeatDetailResponse> {
+            override fun onFailure(call: Call<SeatDetailResponse>, t: Throwable) {
+                Log.e(TAG, "onFailure : " + t.localizedMessage)
+                showme.dismiss()
+            }
+            override fun onResponse(call: Call<SeatDetailResponse>, response: retrofit2.Response<SeatDetailResponse>) {
+                Log.e(TAG, "onResponse : " + response)
+                if (response.body() != null) {
+                    if (response.body()!!.status!!) {
+                        val jsArray = JSONArray(response.body()!!.data);
+                        jSONArrayCursor = JSONArrayCursor(jsArray)
+                        cursorProcess(jSONArrayCursor)
+                    }else{
+                        Toast.makeText(applicationContext,response.body()!!.message!!,Toast.LENGTH_SHORT).show()
+                    }
+                    showme.dismiss()
+                }else{
+                    showme.dismiss()
+                }
+            }
+
+        })
+    }
+
+    private fun cursorProcess(seatnos: Cursor) {
+        print("  seatnos count " + seatnos!!.count)
+        Log.e("seatnos count: ",""+seatnos!!.count)
+        if (seatnos != null && seatnos.count > 0) {
+            print(seating)
+            while (seatnos.moveToNext()) {
+                if (j == 0) {
+                    seating = seatnos.getString(0)
+                } else if (seatnos.count > 1) {
+                    seating = "$seating,"
+                    seating = if (!seatnos.isLast) {
+                        seating + seatnos.getString(0)
+                    } else {
+                        seating + seatnos.getString(0)
+                    }
+                }
+                j++
+            }
+            Log.e(TAG, "onCreate: $seating")
+            print("fassdfsdsdfssdfssdf $seating")
+            val seats_booked = Arrays.asList(*seating.split(",").toTypedArray())
+            for (i in seats_booked.indices) {
+                println("Split String: " + seats_booked[i])
+                if ("A1" == seats_booked[i]) {
+                    A1!!.setBackgroundColor(Color.parseColor("#A45B5B"))
+                } else if ("A2" == seats_booked[i]) {
+                    A2!!.setBackgroundColor(Color.parseColor("#A45B5B"))
+                } else if ("A3" == seats_booked[i]) {
+                    A3!!.setBackgroundColor(Color.parseColor("#A45B5B"))
+                } else if ("A4" == seats_booked[i]) {
+                    A4!!.setBackgroundColor(Color.parseColor("#A45B5B"))
+                } else if ("A5" == seats_booked[i]) {
+                    A5!!.setBackgroundColor(Color.parseColor("#A45B5B"))
+                } else if ("A6" == seats_booked[i]) {
+                    A6!!.setBackgroundColor(Color.parseColor("#A45B5B"))
+                } else if ("B1" == seats_booked[i]) {
+                    B1!!.setBackgroundColor(Color.parseColor("#A45B5B"))
+                } else if ("B2" == seats_booked[i]) {
+                    B2!!.setBackgroundColor(Color.parseColor("#A45B5B"))
+                } else if ("B3" == seats_booked[i]) {
+                    B3!!.setBackgroundColor(Color.parseColor("#A45B5B"))
+                } else if ("B4" == seats_booked[i]) {
+                    B4!!.setBackgroundColor(Color.parseColor("#A45B5B"))
+                } else if ("C1" == seats_booked[i]) {
+                    C1!!.setBackgroundColor(Color.parseColor("#A45B5B"))
+                } else if ("C2" == seats_booked[i]) {
+                    C2!!.setBackgroundColor(Color.parseColor("#A45B5B"))
+                } else if ("C3" == seats_booked[i]) {
+                    C3!!.setBackgroundColor(Color.parseColor("#A45B5B"))
+                } else if ("C4" == seats_booked[i]) {
+                    C4!!.setBackgroundColor(Color.parseColor("#A45B5B"))
+                } else if ("D1" == seats_booked[i]) {
+                    D1!!.setBackgroundColor(Color.parseColor("#A45B5B"))
+                } else if ("D2" == seats_booked[i]) {
+                    D2!!.setBackgroundColor(Color.parseColor("#A45B5B"))
+                } else if ("D3" == seats_booked[i]) {
+                    D3!!.setBackgroundColor(Color.parseColor("#A45B5B"))
+                } else if ("D4" == seats_booked[i]) {
+                    D4!!.setBackgroundColor(Color.parseColor("#A45B5B"))
+                }
+            }
+            // }
+        } else {
+            print("no print")
+        }
     }
 
     fun counter() {

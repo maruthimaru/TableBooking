@@ -34,7 +34,7 @@ class DialogBox : AppCompatActivity() {
         // if button is clicked, close the custom dialog
         order.setOnClickListener {
             if (namecard.text.toString().isEmpty() || creditcard.text.toString().isEmpty() || cvvno.text.toString().isEmpty() || valid.text.toString().isEmpty()) {
-                Toast.makeText(applicationContext, "Please insert the data", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Please insert the maxTables", Toast.LENGTH_SHORT).show()
             } else {
                 val intent: Intent
                 intent = Intent(this@DialogBox, Confirmation::class.java)

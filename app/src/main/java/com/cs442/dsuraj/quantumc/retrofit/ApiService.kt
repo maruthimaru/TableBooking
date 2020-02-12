@@ -1,5 +1,10 @@
 package com.scoto.visitormanagent.retrofit
 
+import com.cs442.dsuraj.quantumc.db.table.*
+import com.cs442.dsuraj.quantumc.retrofit.Utils
+import retrofit2.Call
+import retrofit2.http.*
+
 
 interface ApiService {
 
@@ -22,4 +27,19 @@ interface ApiService {
 //    ): Call<Object>
 //
 //
+    @POST(Utils.inserTableUrl)
+    fun inserTablet(@Body movieList:ArrayList<Movies>): Call<ArrayList<Movies>>
+
+    @POST(Utils.inserBookedTableListUrl)
+    fun insertBookedTable(@Body movieList:ArrayList<MoviesBooked>):Call<ArrayList<MoviesBooked>>
+
+    @FormUrlEncoded
+    @POST(Utils.getdatatUrl)
+    fun getdata(@Field("BOOKING_ID") bookingId: String):Call<DataResponse>
+
+    @POST(Utils.getSeat)
+    fun getSeat(@Body seatRequest:SeatRequest):Call<SeatDetailResponse>
+
+    @GET(Utils.getMax)
+    fun getmax():Call<MaxResponse>
 }

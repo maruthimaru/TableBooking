@@ -19,13 +19,6 @@ interface MovieBookedDao {
     @Query("Delete from Movies_Booked")
     fun deleteAll()
 
-    //delete single user
-    @Query("Delete from Movies_Booked where MOVIE_ID=:id")
-    fun deleteSingleUser(id:String)
-
-    @Query("Select * from Movies_Booked where MOVIE_ID=:mobileNo")
-    fun getAllDetails(mobileNo:String):MoviesBooked
-
     //lastDetails
     @Query("SELECT t1.NAME,t2.THEATRES,t2.PRICE,t2.SHOW_DATE,t2.TIMINGS,t2.EMAIL,t2.PHONE,t2.SEATS_NO FROM Movies_Booked t2,Movies t1 WHERE  t1.MOVIE_ID=t2.MOVIE_ID AND t2.BOOKINGID=:Booking_ID")
     fun getData(Booking_ID:String):Cursor

@@ -24,9 +24,18 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
-import com.cs442.dsuraj.quantumc.TableConfirmation
 import com.cs442.dsuraj.quantumc.db.AppDatabase
+import com.cs442.dsuraj.quantumc.db.JSONArrayCursor
 import com.cs442.dsuraj.quantumc.db.dao.MovieBookedDao
+import com.cs442.dsuraj.quantumc.db.table.DataResponse
+import com.cs442.dsuraj.quantumc.retrofit.CustomDialog
+import com.cs442.dsuraj.quantumc.retrofit.Utils
+import com.google.gson.Gson
+import com.scoto.visitormanagent.retrofit.ApiService
+import com.scoto.visitormanagent.retrofit.RetrofitClientInstance
+import org.json.JSONArray
+import retrofit2.Call
+import retrofit2.Callback
 import java.util.*
 import javax.mail.AuthenticationFailedException
 import javax.mail.MessagingException
@@ -35,6 +44,14 @@ import javax.mail.MessagingException
  * Created by sushma on 10/23/2016.
  */
 class TableConfirmation : AppCompatActivity(), OnInitListener {
+    private lateinit var amount: String
+    private lateinit var home: Button
+    private lateinit var imageview: ImageView
+    private lateinit var datetime: TextView
+    private lateinit var totalamount: TextView
+    private lateinit var seats: TextView
+    private lateinit var bookingid: TextView
+    private lateinit var theatre: TextView
     private val CHECK_CODE = 0x1
     private val LONG_DURATION = 5000
     private val SHORT_DURATION = 1200
@@ -49,6 +66,9 @@ class TableConfirmation : AppCompatActivity(), OnInitListener {
     lateinit var appDatabase: AppDatabase
     lateinit var movieBookedDao: MovieBookedDao
     private val myTTS: TextToSpeech? = null
+    lateinit var jSONArrayCursor: Cursor
+    val TAG=TableConfirmation::class.java.simpleName
+    lateinit var customDialog:CustomDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.movieconfirmation)
@@ -59,15 +79,17 @@ class TableConfirmation : AppCompatActivity(), OnInitListener {
         startActivityForResult(checkTTSIntent, MY_DATA_CHECK_CODE)
         Log.i("inside screen", "ok")
         MovieName = findViewById<View>(R.id.MovieName) as TextView
-        val theatre = findViewById<View>(R.id.theatrescreen) as TextView
-        val bookingid = findViewById<View>(R.id.bookingid) as TextView
-        val seats = findViewById<View>(R.id.seats) as TextView
-        val totalamount = findViewById<View>(R.id.totalamount) as TextView
-        val datetime = findViewById<View>(R.id.datetime) as TextView
-        val imageview = findViewById<View>(R.id.imageView3) as ImageView
+        theatre = findViewById<View>(R.id.theatrescreen) as TextView
+        bookingid = findViewById<View>(R.id.bookingid) as TextView
+         seats = findViewById<View>(R.id.seats) as TextView
+         totalamount = findViewById<View>(R.id.totalamount) as TextView
+         datetime = findViewById<View>(R.id.datetime) as TextView
+         imageview = findViewById<View>(R.id.imageView3) as ImageView
         Log.i("done select", "ok")
-        val home = findViewById<View>(R.id.home) as Button
+         home = findViewById<View>(R.id.home) as Button
+        customDialog=CustomDialog(this)
         appDatabase= AppDatabase.getDatabase(this)
+        jSONArrayCursor=JSONArrayCursor()
         movieBookedDao=appDatabase.movieBooking()
         home.setOnClickListener {
             val home = Intent(this@TableConfirmation, MainActivity::class.java)
@@ -75,7 +97,7 @@ class TableConfirmation : AppCompatActivity(), OnInitListener {
         }
         val BookingId = intent.getIntExtra("booking_id", 0)
         val intent = intent
-        val amount = intent.getStringExtra("amount")
+        amount = intent.getStringExtra("amount")
         val d = DatabaseHelper(applicationContext)
         //boolean val= d.insertdatamovie("Flywire","adad", "6", "adad",true,5 );
 // System.out.print(val);
@@ -86,14 +108,18 @@ class TableConfirmation : AppCompatActivity(), OnInitListener {
         Log.i("done inserting", "ok")
 
         val cursor = movieBookedDao.getData(BookingId.toString())
-
+        getData(BookingId.toString())
         val db = d.readableDatabase
-//        val cursor = d.getData(db, BookingId.toString())
+//        val cursor = d.getMaxTables(db, BookingId.toString())
         Log.i("done selecting", "ok")
         bookingid.text = BookingId.toString()
         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.SEND_SMS), 1)
+        cursorProcess(cursor)
+    }
+
+    fun cursorProcess(cursor: Cursor){
         while (cursor.moveToNext()) {
-            print("data")
+            print("maxTables")
             val email = cursor.getString(5)
             println(email)
             println(cursor.getString(6))
@@ -154,6 +180,38 @@ class TableConfirmation : AppCompatActivity(), OnInitListener {
 //            sendSMS(phoneno, "MovieName: " + MovieName.getText().toString() + " Theatre:" + theatre.getText().toString() +
 //                    "  Seats:" + seats.getText().toString() + " Total Amount: $" + totalamount.getText().toString() + " Date/Time:" + datetime.getText().toString());
         }
+    }
+
+    private fun getData(bookingId:String){
+//        alertDialog = customDialog.loading(activity!!)
+        val showme=customDialog.processDialog()
+        val service = RetrofitClientInstance.createServices(ApiService::class.java, Utils.baseUrl)
+        val listCall = service.getdata(bookingId)
+        Log.e(TAG, "listCall : " + listCall.request())
+        listCall.enqueue(object : Callback<DataResponse> {
+            override fun onFailure(call: Call<DataResponse>, t: Throwable) {
+                Log.e(TAG, "onFailure : " + t.localizedMessage)
+                showme.dismiss()
+            }
+            override fun onResponse(call: Call<DataResponse>, response: retrofit2.Response<DataResponse>) {
+                Log.e(TAG, "onResponse : " + response)
+                if (response.body() != null) {
+                    if (response.body()!!.status!!) {
+                        val jsArray = JSONArray(Gson().toJson(response.body()!!.data));
+                        Log.e(TAG,"json object get " + Gson().toJson(response.body()!!.data))
+                        Log.e(TAG,"json jsArray " + jsArray)
+                    jSONArrayCursor=JSONArrayCursor(jsArray)
+                    cursorProcess(jSONArrayCursor)
+                }else{
+                    Toast.makeText(applicationContext,response.body()!!.message!!,Toast.LENGTH_SHORT).show()
+                }
+                    showme.dismiss()
+                }else{
+                    showme.dismiss()
+                }
+            }
+
+        })
     }
 
     private fun getCalendarUriBase(act: Activity): String? {
@@ -275,10 +333,10 @@ class TableConfirmation : AppCompatActivity(), OnInitListener {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == MY_DATA_CHECK_CODE) {
-            if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) { //the user has the necessary data - create the TTS
+            if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) { //the user has the necessary maxTables - create the TTS
 //                myTTS = new TextToSpeech(TableConfirmation.this, this);
                 Log.d("Initialised TTS", " ")
-            } else { //no data - install it now
+            } else { //no maxTables - install it now
                 val installTTSIntent = Intent()
                 installTTSIntent.action = TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA
                 startActivity(installTTSIntent)

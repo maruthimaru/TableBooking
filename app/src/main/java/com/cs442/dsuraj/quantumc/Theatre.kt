@@ -80,7 +80,6 @@ class Theatre : AppCompatActivity() {
             intent.putExtra("theatre", "Barbeque Nation")
             intent.putExtra("time", "11:55 AM")
             startActivity(intent)
-            finish()
         }
         AMC2.setOnClickListener {
             val intent: Intent
