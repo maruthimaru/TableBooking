@@ -126,13 +126,48 @@ class SeatSelectionRound : AppCompatActivity() {
         // while should encompass the below code and forloop
         seating = ""
         print(theatre)
+        Log.e(TAG,"theatre "+ theatre)
+
         menuItemModelArrayList = ArrayList()
-        menuItemModelArrayList.add(MenuItemModel("Chicken briyani", R.drawable.chicken_biryani_recipe))
-        menuItemModelArrayList.add(MenuItemModel("Egg fride rice", R.drawable.egg_fried_rice))
-        menuItemModelArrayList.add(MenuItemModel("Veg briyani", R.drawable.veg_biryani_recipe))
-        menuItemModelArrayList.add(MenuItemModel("curd rice", R.drawable.curd_rice))
-        menuItemModelArrayList.add(MenuItemModel("Dosa", R.drawable.dosa))
-        menuItemModelArrayList.add(MenuItemModel("Idly", R.drawable.idly))
+
+        if (theatre.equals("Barbeque Nation")){
+            menuItemModelArrayList.add(MenuItemModel("Chicken briyani", R.drawable.chicken_biryani_recipe))
+            menuItemModelArrayList.add(MenuItemModel("Egg fride rice", R.drawable.egg_fried_rice))
+            menuItemModelArrayList.add(MenuItemModel("Veg briyani", R.drawable.veg_biryani_recipe))
+            menuItemModelArrayList.add(MenuItemModel("curd rice", R.drawable.curd_rice))
+            menuItemModelArrayList.add(MenuItemModel("Fish fry", R.drawable.fish_fry))
+            menuItemModelArrayList.add(MenuItemModel("Ice cream", R.drawable.ice_cream))
+            menuItemModelArrayList.add(MenuItemModel("Juice", R.drawable.juice))
+            menuItemModelArrayList.add(MenuItemModel("Meals", R.drawable.meals))
+        }
+        if (theatre.equals("Bird on Tree")){
+            menuItemModelArrayList.add(MenuItemModel("curd rice", R.drawable.curd_rice))
+            menuItemModelArrayList.add(MenuItemModel("Dosa", R.drawable.dosa))
+            menuItemModelArrayList.add(MenuItemModel("Idly", R.drawable.idly))
+            menuItemModelArrayList.add(MenuItemModel("Cholebhature", R.drawable.cholebhature))
+            menuItemModelArrayList.add(MenuItemModel("Matar Paneer", R.drawable.matarpaneer))
+            menuItemModelArrayList.add(MenuItemModel("Pastha", R.drawable.pastha))
+            menuItemModelArrayList.add(MenuItemModel("Pizza", R.drawable.pizza))
+            menuItemModelArrayList.add(MenuItemModel("Juice", R.drawable.juice1))
+            menuItemModelArrayList.add(MenuItemModel("Ice cream", R.drawable.ice_cream1))
+        }
+        if (theatre.equals("The Royal Hindu Restaurant")){
+            menuItemModelArrayList.add(MenuItemModel("chapatiroll", R.drawable.chapatiroll))
+            menuItemModelArrayList.add(MenuItemModel("chicken Tikka Masala", R.drawable.chickentikkamasala))
+            menuItemModelArrayList.add(MenuItemModel("kerala beef fry", R.drawable.kerala_beef_fry))
+            menuItemModelArrayList.add(MenuItemModel("Uttapam", R.drawable.uttapam))
+            menuItemModelArrayList.add(MenuItemModel("Chinese dishes", R.drawable.chinese_dishes))
+            menuItemModelArrayList.add(MenuItemModel("Fish fry", R.drawable.fish_fry1))
+            menuItemModelArrayList.add(MenuItemModel("Juice", R.drawable.juice2))
+            menuItemModelArrayList.add(MenuItemModel("Dosa", R.drawable.dosa1))
+        }
+
+//        menuItemModelArrayList.add(MenuItemModel("Chicken briyani", R.drawable.chicken_biryani_recipe))
+//        menuItemModelArrayList.add(MenuItemModel("Egg fride rice", R.drawable.egg_fried_rice))
+//        menuItemModelArrayList.add(MenuItemModel("Veg briyani", R.drawable.veg_biryani_recipe))
+//        menuItemModelArrayList.add(MenuItemModel("curd rice", R.drawable.curd_rice))
+//        menuItemModelArrayList.add(MenuItemModel("Dosa", R.drawable.dosa))
+//        menuItemModelArrayList.add(MenuItemModel("Idly", R.drawable.idly))
         val adapter = MenuItemAdapter(this, menuItemModelArrayList)
         recyclerView.setAdapter(adapter)
         val seatnos =movieBookedDao.getseats(theatre!!, date!!, time!!, movie)

@@ -57,6 +57,8 @@
         </activity>
         <activity android:name=".SeatSelectionRound"
             android:screenOrientation="portrait"/>
+        <activity android:name=".Theatre1" />
+        <activity android:name=".Theatre2" />
     </application>
 
 </manifest>

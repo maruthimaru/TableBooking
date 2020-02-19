@@ -66,8 +66,17 @@ class Detail2 : Activity() {
         val btw = findViewById<View>(R.id.next) as Button
         btw.setOnClickListener {
             if (date != null) {
-                val intent = Intent(this@Detail2, Theatre::class.java)
-                intent.putExtra("movie_id", movie)
+                var intent:Intent?=null
+                if (movie==1){
+                    intent= Intent(this@Detail2, Theatre::class.java)
+                }else if (movie==2){
+                    intent= Intent(this@Detail2, Theatre1::class.java)
+                }else if (movie==3){
+                    intent= Intent(this@Detail2, Theatre2::class.java)
+                }else if (movie==4){
+                    intent= Intent(this@Detail2, Theatre::class.java)
+                }
+                intent!!.putExtra("movie_id", movie)
                 intent.putExtra("date", date)
                 startActivity(intent)
             } else {
