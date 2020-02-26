@@ -161,6 +161,76 @@ class SeatSelectionRound : AppCompatActivity() {
             menuItemModelArrayList.add(MenuItemModel("Juice", R.drawable.juice2))
             menuItemModelArrayList.add(MenuItemModel("Dosa", R.drawable.dosa1))
         }
+        if (theatre.equals("The Saravana bavan")){
+            menuItemModelArrayList.add(MenuItemModel("chapatiroll", R.drawable.chapatiroll))
+            menuItemModelArrayList.add(MenuItemModel("chicken Tikka Masala", R.drawable.chickentikkamasala))
+            menuItemModelArrayList.add(MenuItemModel("kerala beef fry", R.drawable.kerala_beef_fry))
+            menuItemModelArrayList.add(MenuItemModel("Uttapam", R.drawable.uttapam))
+            menuItemModelArrayList.add(MenuItemModel("Chinese dishes", R.drawable.chinese_dishes))
+            menuItemModelArrayList.add(MenuItemModel("Fish fry", R.drawable.fish_fry1))
+            menuItemModelArrayList.add(MenuItemModel("Juice", R.drawable.juice2))
+            menuItemModelArrayList.add(MenuItemModel("Dosa", R.drawable.dosa1))
+        }
+        if (theatre.equals("Radisson blu")){
+            menuItemModelArrayList.add(MenuItemModel("chapatiroll", R.drawable.chapatiroll))
+            menuItemModelArrayList.add(MenuItemModel("chicken Tikka Masala", R.drawable.chickentikkamasala))
+            menuItemModelArrayList.add(MenuItemModel("kerala beef fry", R.drawable.kerala_beef_fry))
+            menuItemModelArrayList.add(MenuItemModel("Uttapam", R.drawable.uttapam))
+            menuItemModelArrayList.add(MenuItemModel("Chinese dishes", R.drawable.chinese_dishes))
+            menuItemModelArrayList.add(MenuItemModel("Fish fry", R.drawable.fish_fry1))
+            menuItemModelArrayList.add(MenuItemModel("Juice", R.drawable.juice2))
+            menuItemModelArrayList.add(MenuItemModel("Dosa", R.drawable.dosa1))
+        }
+        if (theatre.equals("Holiday residency")){
+            menuItemModelArrayList.add(MenuItemModel("chapatiroll", R.drawable.chapatiroll))
+            menuItemModelArrayList.add(MenuItemModel("chicken Tikka Masala", R.drawable.chickentikkamasala))
+            menuItemModelArrayList.add(MenuItemModel("kerala beef fry", R.drawable.kerala_beef_fry))
+            menuItemModelArrayList.add(MenuItemModel("Uttapam", R.drawable.uttapam))
+            menuItemModelArrayList.add(MenuItemModel("Chinese dishes", R.drawable.chinese_dishes))
+            menuItemModelArrayList.add(MenuItemModel("Fish fry", R.drawable.fish_fry1))
+            menuItemModelArrayList.add(MenuItemModel("Juice", R.drawable.juice2))
+            menuItemModelArrayList.add(MenuItemModel("Dosa", R.drawable.dosa1))
+        }
+        if (theatre.equals("Plaza inn")){
+            menuItemModelArrayList.add(MenuItemModel("chapatiroll", R.drawable.chapatiroll))
+            menuItemModelArrayList.add(MenuItemModel("chicken Tikka Masala", R.drawable.chickentikkamasala))
+            menuItemModelArrayList.add(MenuItemModel("kerala beef fry", R.drawable.kerala_beef_fry))
+            menuItemModelArrayList.add(MenuItemModel("Uttapam", R.drawable.uttapam))
+            menuItemModelArrayList.add(MenuItemModel("Chinese dishes", R.drawable.chinese_dishes))
+            menuItemModelArrayList.add(MenuItemModel("Fish fry", R.drawable.fish_fry1))
+            menuItemModelArrayList.add(MenuItemModel("Juice", R.drawable.juice2))
+            menuItemModelArrayList.add(MenuItemModel("Dosa", R.drawable.dosa1))
+        }
+        if (theatre.equals("Le meridian")){
+            menuItemModelArrayList.add(MenuItemModel("chapatiroll", R.drawable.chapatiroll))
+            menuItemModelArrayList.add(MenuItemModel("chicken Tikka Masala", R.drawable.chickentikkamasala))
+            menuItemModelArrayList.add(MenuItemModel("kerala beef fry", R.drawable.kerala_beef_fry))
+            menuItemModelArrayList.add(MenuItemModel("Uttapam", R.drawable.uttapam))
+            menuItemModelArrayList.add(MenuItemModel("Chinese dishes", R.drawable.chinese_dishes))
+            menuItemModelArrayList.add(MenuItemModel("Fish fry", R.drawable.fish_fry1))
+            menuItemModelArrayList.add(MenuItemModel("Juice", R.drawable.juice2))
+            menuItemModelArrayList.add(MenuItemModel("Dosa", R.drawable.dosa1))
+        }
+        if (theatre.equals("Haritage inn")){
+            menuItemModelArrayList.add(MenuItemModel("chapatiroll", R.drawable.chapatiroll))
+            menuItemModelArrayList.add(MenuItemModel("chicken Tikka Masala", R.drawable.chickentikkamasala))
+            menuItemModelArrayList.add(MenuItemModel("kerala beef fry", R.drawable.kerala_beef_fry))
+            menuItemModelArrayList.add(MenuItemModel("Uttapam", R.drawable.uttapam))
+            menuItemModelArrayList.add(MenuItemModel("Chinese dishes", R.drawable.chinese_dishes))
+            menuItemModelArrayList.add(MenuItemModel("Fish fry", R.drawable.fish_fry1))
+            menuItemModelArrayList.add(MenuItemModel("Juice", R.drawable.juice2))
+            menuItemModelArrayList.add(MenuItemModel("Dosa", R.drawable.dosa1))
+        }
+        if (theatre.equals("Lemon tree")){
+            menuItemModelArrayList.add(MenuItemModel("chapatiroll", R.drawable.chapatiroll))
+            menuItemModelArrayList.add(MenuItemModel("chicken Tikka Masala", R.drawable.chickentikkamasala))
+            menuItemModelArrayList.add(MenuItemModel("kerala beef fry", R.drawable.kerala_beef_fry))
+            menuItemModelArrayList.add(MenuItemModel("Uttapam", R.drawable.uttapam))
+            menuItemModelArrayList.add(MenuItemModel("Chinese dishes", R.drawable.chinese_dishes))
+            menuItemModelArrayList.add(MenuItemModel("Fish fry", R.drawable.fish_fry1))
+            menuItemModelArrayList.add(MenuItemModel("Juice", R.drawable.juice2))
+            menuItemModelArrayList.add(MenuItemModel("Dosa", R.drawable.dosa1))
+        }
 
 //        menuItemModelArrayList.add(MenuItemModel("Chicken briyani", R.drawable.chicken_biryani_recipe))
 //        menuItemModelArrayList.add(MenuItemModel("Egg fride rice", R.drawable.egg_fried_rice))

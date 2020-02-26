@@ -36,6 +36,17 @@ class Theatre1 : AppCompatActivity() {
         val LMC3 = findViewById<View>(R.id.LMC3) as Button
         val LMC4 = findViewById<View>(R.id.LMC4) as Button
         val LMC5 = findViewById<View>(R.id.LMC5) as Button
+        val LMC9 = findViewById<View>(R.id.LMC9) as Button
+        val LMC6 = findViewById<View>(R.id.LMC6) as Button
+        val LMC10 = findViewById<View>(R.id.LMC10) as Button
+        val LMC7 = findViewById<View>(R.id.LMC7) as Button
+        val LMC8 = findViewById<View>(R.id.LMC8) as Button
+        val LMC15 = findViewById<View>(R.id.LMC15) as Button
+        val LMC12 = findViewById<View>(R.id.LMC12) as Button
+        val LMC16 = findViewById<View>(R.id.LMC16) as Button
+        val LMC13 = findViewById<View>(R.id.LMC13) as Button
+        val LMC14 = findViewById<View>(R.id.LMC14) as Button
+
         amcdist = findViewById<View>(R.id.amcdist) as TextView
         regaldist = findViewById<View>(R.id.regaldist) as TextView
         landmark = findViewById<View>(R.id.landmarkdist) as TextView
@@ -194,7 +205,7 @@ class Theatre1 : AppCompatActivity() {
             }
             intent.putExtra("movie_id", movie)
             intent.putExtra("date", date)
-            intent.putExtra("theatre", "The Royal Hindu Restaurant")
+            intent.putExtra("theatre", "Lemon tree")
             intent.putExtra("time", "11.30 PM")
             startActivity(intent)
         }
@@ -207,7 +218,7 @@ class Theatre1 : AppCompatActivity() {
             }
             intent.putExtra("movie_id", movie)
             intent.putExtra("date", date)
-            intent.putExtra("theatre", "The Royal Hindu Restaurant")
+            intent.putExtra("theatre", "Lemon tree")
             intent.putExtra("time", "02.45 PM")
             startActivity(intent)
         }
@@ -220,7 +231,7 @@ class Theatre1 : AppCompatActivity() {
             }
             intent.putExtra("movie_id", movie)
             intent.putExtra("date", date)
-            intent.putExtra("theatre", "The Royal Hindu Restaurant")
+            intent.putExtra("theatre", "Lemon tree")
             intent.putExtra("time", "04.30 PM")
             startActivity(intent)
         }
@@ -233,7 +244,7 @@ class Theatre1 : AppCompatActivity() {
             }
             intent.putExtra("movie_id", movie)
             intent.putExtra("date", date)
-            intent.putExtra("theatre", "The Royal Hindu Restaurant")
+            intent.putExtra("theatre", "Lemon tree")
             intent.putExtra("time", "07.05 PM")
             startActivity(intent)
         }
@@ -246,10 +257,142 @@ class Theatre1 : AppCompatActivity() {
             }
             intent.putExtra("movie_id", movie)
             intent.putExtra("date", date)
-            intent.putExtra("theatre", "The Royal Hindu Restaurant")
+            intent.putExtra("theatre", "Lemon tree")
             intent.putExtra("time", "09.15 PM")
             startActivity(intent)
         }
+
+        LMC9.setOnClickListener {
+            val intent: Intent
+            intent = if (movie == 1) {
+                Intent(this@Theatre1, SeatSelectionRound::class.java)
+            } else {
+                Intent(this@Theatre1, SeatSelection::class.java)
+            }
+            intent.putExtra("movie_id", movie)
+            intent.putExtra("date", date)
+            intent.putExtra("theatre", "The Saravana bavan")
+            intent.putExtra("time", "11:30 PM")
+            startActivity(intent)
+        }
+        LMC6.setOnClickListener {
+            val intent: Intent
+            intent = if (movie == 1) {
+                Intent(this@Theatre1, SeatSelectionRound::class.java)
+            } else {
+                Intent(this@Theatre1, SeatSelection::class.java)
+            }
+            intent.putExtra("movie_id", movie)
+            intent.putExtra("date", date)
+            intent.putExtra("theatre", "The Saravana bavan")
+            intent.putExtra("time", "2:45 PM")
+            startActivity(intent)
+        }
+        LMC10.setOnClickListener {
+            val intent: Intent
+            intent = if (movie == 1) {
+                Intent(this@Theatre1, SeatSelectionRound::class.java)
+            } else {
+                Intent(this@Theatre1, SeatSelection::class.java)
+            }
+            intent.putExtra("movie_id", movie)
+            intent.putExtra("date", date)
+            intent.putExtra("theatre", "The Saravana bavan")
+            intent.putExtra("time", "4:30 PM")
+            startActivity(intent)
+        }
+        LMC7.setOnClickListener {
+            val intent: Intent
+            intent = if (movie == 1) {
+                Intent(this@Theatre1, SeatSelectionRound::class.java)
+            } else {
+                Intent(this@Theatre1, SeatSelection::class.java)
+            }
+            intent.putExtra("movie_id", movie)
+            intent.putExtra("date", date)
+            intent.putExtra("theatre", "The Saravana bavan")
+            intent.putExtra("time", "7:05 PM")
+            startActivity(intent)
+        }
+        LMC8.setOnClickListener {
+            val intent: Intent
+            intent = if (movie == 1) {
+                Intent(this@Theatre1, SeatSelectionRound::class.java)
+            } else {
+                Intent(this@Theatre1, SeatSelection::class.java)
+            }
+            intent.putExtra("movie_id", movie)
+            intent.putExtra("date", date)
+            intent.putExtra("theatre", "The Saravana bavan")
+            intent.putExtra("time", "9:15 PM")
+            startActivity(intent)
+        }
+        LMC15.setOnClickListener {
+            val intent: Intent
+            intent = if (movie == 1) {
+                Intent(this@Theatre1, SeatSelectionRound::class.java)
+            } else {
+                Intent(this@Theatre1, SeatSelection::class.java)
+            }
+            intent.putExtra("movie_id", movie)
+            intent.putExtra("date", date)
+            intent.putExtra("theatre", "Haritage inn")
+            intent.putExtra("time", "11:30 PM")
+            startActivity(intent)
+        }
+        LMC12.setOnClickListener {
+            val intent: Intent
+            intent = if (movie == 1) {
+                Intent(this@Theatre1, SeatSelectionRound::class.java)
+            } else {
+                Intent(this@Theatre1, SeatSelection::class.java)
+            }
+            intent.putExtra("movie_id", movie)
+            intent.putExtra("date", date)
+            intent.putExtra("theatre", "Haritage inn")
+            intent.putExtra("time", "2:45 PM")
+            startActivity(intent)
+        }
+        LMC16.setOnClickListener {
+            val intent: Intent
+            intent = if (movie == 1) {
+                Intent(this@Theatre1, SeatSelectionRound::class.java)
+            } else {
+                Intent(this@Theatre1, SeatSelection::class.java)
+            }
+            intent.putExtra("movie_id", movie)
+            intent.putExtra("date", date)
+            intent.putExtra("theatre", "Haritage inn")
+            intent.putExtra("time", "4:30 PM")
+            startActivity(intent)
+        }
+        LMC13.setOnClickListener {
+            val intent: Intent
+            intent = if (movie == 1) {
+                Intent(this@Theatre1, SeatSelectionRound::class.java)
+            } else {
+                Intent(this@Theatre1, SeatSelection::class.java)
+            }
+            intent.putExtra("movie_id", movie)
+            intent.putExtra("date", date)
+            intent.putExtra("theatre", "Haritage inn")
+            intent.putExtra("time", "7:05 PM")
+            startActivity(intent)
+        }
+        LMC14.setOnClickListener {
+            val intent: Intent
+            intent = if (movie == 1) {
+                Intent(this@Theatre1, SeatSelectionRound::class.java)
+            } else {
+                Intent(this@Theatre1, SeatSelection::class.java)
+            }
+            intent.putExtra("movie_id", movie)
+            intent.putExtra("date", date)
+            intent.putExtra("theatre", "Haritage inn")
+            intent.putExtra("time", "09.15 PM")
+            startActivity(intent)
+        }
+
     }
 
     fun distance(latitude: Double, longitude: Double): Int {

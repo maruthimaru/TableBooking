@@ -6,9 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/activity_theatre">
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -182,7 +180,7 @@
         android:layout_marginTop="15dp" />
 
     <TextView
-    android:text="Barbeque Nation"
+    android:text="Holiday residency"
     android:layout_width="wrap_content"
     android:id="@+id/button"
         android:layout_height="40dp"
@@ -194,7 +192,7 @@
         android:layout_marginTop="15dp" />
 
     <TextView
-        android:text="Bird on Tree"
+        android:text="Plaza inn"
         android:layout_width="wrap_content"
         android:id="@+id/textView5"
         android:textSize="20sp"
@@ -285,6 +283,7 @@
         android:layout_toStartOf="@+id/landmarkdist" />
 
     <RelativeLayout
+        android:id="@+id/LMC11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/LMC4">
@@ -351,6 +350,75 @@
             android:layout_marginTop="15dp" />
 
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/LMC11">
+
+        <TextView
+            android:text="Le meridian"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:id="@+id/textView8"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:gravity="left|center"
+            android:layout_marginTop="20dp"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:text="2:45 PM"
+            android:layout_width="wrap_content"
+            android:id="@+id/LMC12"
+            android:background="@color/colorPrimary"
+            android:layout_below="@+id/textView8"
+            android:layout_centerHorizontal="true"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp" />
+
+        <Button
+            android:text="7:05 PM"
+            android:layout_width="wrap_content"
+            android:id="@+id/LMC13"
+            android:background="@color/colorPrimary"
+            android:layout_marginTop="11dp"
+            android:layout_below="@+id/LMC12"
+            android:layout_alignParentStart="true"
+            android:layout_height="30dp" />
+
+        <Button
+            android:text="9:15 PM"
+            android:layout_width="wrap_content"
+            android:id="@+id/LMC14"
+            android:background="@color/colorPrimary"
+            android:layout_alignBottom="@+id/LMC13"
+            android:layout_alignStart="@+id/LMC12"
+            android:layout_alignTop="@+id/LMC13"
+            android:layout_height="30dp" />
+
+        <Button
+            android:text="11:30 PM"
+            android:layout_width="wrap_content"
+            android:id="@+id/LMC15"
+            android:background="@color/colorPrimary"
+            android:layout_below="@+id/textView8"
+            android:layout_alignParentStart="true"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp" />
+
+        <Button
+            android:text="4:30 PM"
+            android:layout_width="wrap_content"
+            android:id="@+id/LMC16"
+            android:background="@color/colorPrimary"
+            android:layout_below="@+id/textView8"
+            android:layout_alignParentEnd="true"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp" />
+
+    </RelativeLayout>
+
 
 
 
